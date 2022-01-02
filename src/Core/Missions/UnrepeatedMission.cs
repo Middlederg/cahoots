@@ -1,3 +1,5 @@
+using System;
+
 namespace Cahoots.Core
 {
     public class UnrepeatedMission : IMission
@@ -17,7 +19,7 @@ namespace Cahoots.Core
             {
                 return false;
             }
-             if (colors || cardSet.ColorCount != 4)
+            if (colors || cardSet.ColorCount != 4)
             {
                 return false;
             }
