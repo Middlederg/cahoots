@@ -6,7 +6,7 @@ namespace Cahoots.Core
 
         public GreaterThanMission(int minimun)
         {
-            this.minimun = maximun;
+            this.minimun = minimun;
         }
 
         public bool CanBeCompleted(CardSet cardSet) => cardSet.AllAreGreaterThan(minimun);

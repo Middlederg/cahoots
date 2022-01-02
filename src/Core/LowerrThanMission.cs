@@ -1,14 +1,14 @@
 namespace Cahoots.Core
 {
-    public class LowerrThanMission : IMission
+    public class LowerThanMission : IMission
     {
         private readonly int maximun;
 
         public LowerThanMission(int maximun)
         {
-            this.minimun = maximun;
+            this.maximun = maximun;
         }
 
-        public bool CanBeCompleted(CardSet cardSet) => cardSet.AllAreLowerThan(minimun);
+        public bool CanBeCompleted(CardSet cardSet) => cardSet.AllAreLowerThan(maximun);
     }
 }

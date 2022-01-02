@@ -99,11 +99,16 @@ namespace Cahoots.Core
             return Math.Max(ascendingCount, descendingCount);
         }
 
-        public int OrderedLadderCount()
+        public int OrderedAscendingLadderCount()
         {
-            var numbers = cards.Select(x => x.Number);
+            var numbers = cards.Select(x => x.Number).ToList();
             int ascendingCount = OrderExtensions.AscendingCount(numbers);
-            var descending = numbers.Distinct().OrderBy(x => x);
+
+            for (int i = 0; i < numbers.Count; i++)
+            {
+                
+            OrderExtensions.AscendingCount(numbers.RemoveAt(i));
+            }
             int descendingCount = OrderExtensions.DescendingCount(numbers);
 
             return Math.Max(ascendingCount, descendingCount);
@@ -150,9 +155,6 @@ namespace Cahoots.Core
 
     public class EvenOddAlternanceMission : IMission
     {
-        public bool CanBeCompleted(CardSet cardSet)
-        {
-            throw new NotImplementedException();
-        }
+        public bool CanBeCompleted(CardSet cardSet) => cardSet.HasEvenOddAlternance();
     }
 }
