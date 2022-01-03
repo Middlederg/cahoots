@@ -8,16 +8,12 @@ namespace Cahoots.Core
     {
         private readonly IEnumerable<Card> cards;
 
-        public CardSet(IEnumerable<Card> cards)
+        public CardSet(IEnumerable<Pile> piles)
         {
-            if (cards is null || cards.Count() != 4)
-            {
-                throw new ArgumentException($"A cardset must be formed by 4 cards. {cards.Count()} were found");
-            }
-            this.cards = cards;
+            cards = piles.Select(x => x.VisibleCard);
         }
 
-        public int TotalSum(int sum, Color color = null) => cards
+        public int TotalSum(Color color = null) => cards
             .Where(x => color is null || color == x.Color)
             .Sum(x => x.Number);
 

@@ -9,10 +9,10 @@ namespace Cahoots.Core
         {
             Hex = hex;
         }
-        public static Color Red => new Color("D6234A");
-        public static Color Orange => new Color("FF6600");
-        public static Color Green => new Color("006400");
-        public static Color Blue => new Color("2D7AC0");
+        public static Color Red => new Color("D82E18");
+        public static Color Orange => new Color("E4A102");
+        public static Color Green => new Color("337558");
+        public static Color Blue => new Color("1171D2");
 
         public static IEnumerable<Color> Colors
         {

@@ -7,7 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9978FB63-026
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cahoots.Core", "src\Core\Cahoots.Core.csproj", "{4DC2FD1F-3984-42F3-8231-A0A8E3D7F36C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cahoots.Web", "src\Cahoots.Web\Cahoots.Web.csproj", "{F3366E1B-B8B7-4175-A2AD-08FE786F33A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cahoots.Web", "src\Cahoots.Web\Cahoots.Web.csproj", "{F3366E1B-B8B7-4175-A2AD-08FE786F33A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{082666D9-023C-486D-9447-B08A962704DF}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

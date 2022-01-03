@@ -2,8 +2,8 @@ namespace Cahoots.Core
 {
     public class SumMission : IMission
     {
-        private int objective;
-        private Color color;
+        private readonly int objective;
+        private readonly Color color;
 
         public SumMission(int objective, Color color = null)
         {
@@ -13,7 +13,16 @@ namespace Cahoots.Core
 
         public bool CanBeCompleted(CardSet cardSet)
         {
-            return cardSet.TotalSum(objective, color) == objective;
+            return cardSet.TotalSum(color) == objective;
+        }
+
+        public override string ToString()
+        {
+            if (color is null)
+            {
+                return $"Sum = {objective}";
+            }
+            return $"Sum [{color.Hex}] = {objective}";
         }
     }
 }

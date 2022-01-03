@@ -1,0 +1,34 @@
+﻿
+<div class="grid grid-cols-@Game.Piles.Count gap-2 my-2">
+    @foreach (var pile in Game.Piles)
+    {
+        <div class="flex justify-center">
+            <Card InnerCard="pile.VisibleCard" OnCardSelected="() => OnPileSelected(pile)" IsClickable="chosenCard is not null" />
+        </div>
+    }
+</div>
+
+@code {
+
+    [CascadingParameter]
+    public Game Game { get; set; }
+
+    [Parameter]
+    public EventCallback<Core.Card> OnCardPlayed { get; set; }
+
+    private Core.Card chosenCard;
+    public void Chose(Core.Card card) => chosenCard = card;
+
+    protected async Task OnPileSelected(Pile pile)
+    {
+        if (chosenCard is not null)
+        {
+            if (Game.CanBePlayed(chosenCard, pile))
+            {
+                Game.Play(chosenCard, pile);
+                Game.AddNewCardToHand();
+                await OnCardPlayed.InvokeAsync(chosenCard);
+            }
+        }
+    }
+}

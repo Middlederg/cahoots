@@ -1,0 +1,35 @@
+﻿
+<div class="my-8 bg-slate-100 rounded-xl py-4">
+    <h2 class="font-xl font-semibold text-center text-slate-700">
+        Your hand
+    </h2>
+    <section class="grid grid-cols-@Game.PlayerHand.Cards.Count gap-2 mt-2">
+        @foreach (var card in Game.PlayerHand.Cards)
+        {
+            <div class="flex justify-center">
+                <Card InnerCard="card" OnCardSelected="CardSelected" IsSelected="SelectedCard == card" />
+            </div>
+        }
+    </section>
+    <div class="text-xs text-right font-semibold pt-3  px-4 md:px-8">
+        @Game.RemainingCardCount cards remaining
+    </div>
+</div>
+
+@code {
+
+    [CascadingParameter]
+    private Game Game { get; set; }
+
+    [Parameter]
+    public EventCallback<Core.Card> OnCardSelected { get; set; }
+
+    public Core.Card SelectedCard { get; set; }
+
+    protected void CardSelected(Core.Card card)
+    {
+        SelectedCard = card;
+        OnCardSelected.InvokeAsync(card);
+    }
+
+}

@@ -4,13 +4,13 @@ namespace Cahoots.Core
 {
     public record Card
     {
-        private readonly Guid id;
+        public Guid Id { get; }
         public int Number { get; }
         public Color Color { get; }
 
         public Card(int number, Color color)
         {
-            id = Guid.NewGuid();
+            Id = Guid.NewGuid();
             Number = number;
             Color = color;
         }

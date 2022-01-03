@@ -6,8 +6,9 @@ namespace Cahoots.Core
     public class Pile
     {
         private readonly List<Card> cards;
-        private Card VisibleCard => cards.Last();
-        private int TotalCount => cards.Count;
+
+        public Card VisibleCard => cards.Last();
+        public int TotalCount => cards.Count;
 
         public Pile(Card card)
         {

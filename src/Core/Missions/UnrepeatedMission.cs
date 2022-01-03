@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Cahoots.Core
 {
@@ -24,6 +26,25 @@ namespace Cahoots.Core
                 return false;
             }
             return true;
+        }
+
+
+        public override string ToString()
+        {
+            string result = string.Join(" + ", GetTexts());
+            return result;
+
+            IEnumerable<string> GetTexts()
+            {
+                if (numbers)
+                {
+                    yield return "all numbers";
+                }
+                if (numbers)
+                {
+                    yield return "all colors";
+                }
+            }
         }
     }
 }

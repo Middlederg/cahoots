@@ -7,6 +7,7 @@ namespace Cahoots.Core
         public static IEnumerable<IMission> Create()
         {
             yield return new EvenNumberMission();
+            yield return new SimpleMission();
             yield return new EvenOddAlternanceMission();
             yield return new MatchColorMission(4, Color.Blue, Color.Green);
             yield return new MatchColorMission(3, Color.Red);

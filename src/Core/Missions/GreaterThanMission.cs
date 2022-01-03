@@ -10,5 +10,7 @@ namespace Cahoots.Core
         }
 
         public bool CanBeCompleted(CardSet cardSet) => cardSet.AllAreGreaterThan(minimun);
+
+        public override string ToString() => $"> {minimun}";
     }
 }

@@ -1,0 +1,44 @@
+﻿<label class="cursor-pointer w-16 h-24 md:w-24 md:h-32 lg:w-32 lg:h-44
+        @(IsSelected ? "outline outline-slate-500 outline-offset-2 md:outline-offset-4 outline-2" : "outline-none")
+        @(IsClickable ? "hover:shadow-lg" : "")
+       rounded-lg p-1 md:p-1.5" 
+       style="border: 0.15em solid #@InnerCard.Color.Hex">
+
+    <input type="radio"
+           id="@GroupName"
+           value="@GroupName"
+           name="@nameof(InnerCard.Id)"
+           class="hidden"
+           @onchange="(args) => CardSelected()" />
+
+    <span style="background-color:#@InnerCard.Color.Hex" class="w-full h-full flex items-center justify-center rounded-lg">
+        <span class="text-white text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-mono font-bold">
+            @InnerCard.Number
+        </span>
+    </span>
+
+</label>
+
+
+@code {
+    [Parameter]
+    public bool IsClickable { get; set; } = true;
+
+    [Parameter]
+    public bool IsSelected { get; set; } = false;
+
+    [Parameter]
+    public string GroupName { get; set; }
+
+    [Parameter]
+    public Core.Card InnerCard { get; set; }
+
+    [Parameter]
+    public EventCallback<Core.Card> OnCardSelected { get; set; }
+
+    private async Task CardSelected()
+    {
+        await OnCardSelected.InvokeAsync(InnerCard);
+    }
+
+}

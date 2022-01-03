@@ -5,8 +5,8 @@ namespace Cahoots.Core
 {
     public class MatchColorMission : IMission
     {
-        private IEnumerable<Color> matchColors;
-        private int objective;
+        private readonly IEnumerable<Color> matchColors;
+        private readonly int objective;
 
         public MatchColorMission(int objective, params Color[] matchColors)
         {
@@ -18,5 +18,7 @@ namespace Cahoots.Core
         {
             return cardSet.FromColor(matchColors) == objective;
         }
+
+        public override string ToString() => $"{string.Join(" / ", matchColors.Select(x => $"[#{x.Hex}]")) } x{objective}";
     }
 }
