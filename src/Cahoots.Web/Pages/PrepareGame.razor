@@ -31,6 +31,7 @@
                        max="6" />
 
             </div>
+
         </div>
 
         <div class="flex-1 max-h-40">
@@ -56,8 +57,6 @@
 {
     private GameOptions model = new GameOptions();
 
-    private void Play()
-    {
-        navigationManager.NavigateTo("/?handsize=" + model.HandSize);
-    }
+    private void Play() => navigationManager.NavigateTo("play/?handsize=" + model.HandSize);
+    
 }
