@@ -1,10 +1,21 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Cahoots.Core
 {
     public static class MissionFactory
     {
-        public static IEnumerable<IMission> Create()
+        public const int DefaultMissionSize = 54;
+
+        public static IEnumerable<IMission> Create(int? maxSize)
+        {
+            var deck = GetAllMissions().ToList();
+            int size = maxSize.HasValue ? Math.Min(maxSize.Value, deck.Count) : deck.Count;
+            return Randomizer.RandomizeList(deck).Take(size);
+        }
+
+        public static IEnumerable<IMission> GetAllMissions()
         {
             yield return new EvenNumberMission();
             yield return new SimpleMission();

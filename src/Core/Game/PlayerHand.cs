@@ -1,15 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Cahoots.Core
 {
     public class PlayerHand
     {
+        public const int MinSize = 2;
+        public const int MaxSize = 8;
+
         private readonly List<PlayerHandCard> cards;
         public List<Card> Cards => cards.OrderBy(x => x.Position).Select(x => x.Card).ToList();
 
         public PlayerHand(IEnumerable<Card> cards)
         {
+            if (cards.Count() < MinSize || cards.Count() > MaxSize)
+            {
+                throw new ArgumentException($"Hand size must be between {MinSize} and {MaxSize}");
+            }
+
             this.cards = cards.Select((card, index) => new PlayerHandCard(index, card)).ToList();
         }
 

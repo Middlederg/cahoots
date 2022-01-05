@@ -4,14 +4,6 @@ using System.Linq;
 
 namespace Cahoots.Core
 {
-    public record LogEntry(string Title, LogEntryType Type) { }
-
-    public enum LogEntryType
-    {
-        CardPlayed,
-        MissionAccomplished
-    }
-
     public class Game
     {
         private readonly List<Card> deck;
@@ -26,20 +18,21 @@ namespace Cahoots.Core
         public List<IMission> AvaliableMissions { get; }
         public List<IMission> CompletedMissions { get; private set; }
 
-        public List<LogEntry> Log { get; }
-        public string LastMission => Log.LastOrDefault(x => x.Type == LogEntryType.MissionAccomplished)?.Title;
+        public Log Log { get; }
 
         public Game(GameOptions options)
         {
-            deck = CardFactory.Create().ToList();
-            PlayerHand = new PlayerHand(Enumerable.Range(0, options.HandSize).Select(i => DrawCard()));
-            Piles = Enumerable.Range(0, options.PileCount).Select(i => new Pile(DrawCard())).ToList();
+            deck = Deck.Create(options.DeckSize).ToList();
+            var handCards = Enumerable.Range(1, options.HandSize).Select(i => DrawCard()).ToList();
+            PlayerHand = new PlayerHand(handCards);
 
-            missionDeck = MissionFactory.Create().ToList();
-            AvaliableMissions = Enumerable.Range(0, options.MissionCount).Select(i => DrawMission()).ToList();
+            Piles = Enumerable.Range(0, GameOptions.PileCount).Select(i => new Pile(DrawCard())).ToList();
+
+            missionDeck = MissionFactory.Create(options.MissionDeckSize).ToList();
+            AvaliableMissions = Enumerable.Range(1, GameOptions.AvaliableMissionCount).Select(i => DrawMission()).ToList();
             CompletedMissions = new List<IMission>();
 
-            Log = new List<LogEntry>();
+            Log = new Log();
         }
 
         public void AddNewCardToHand()
@@ -70,7 +63,7 @@ namespace Cahoots.Core
         {
             pile.Add(card);
             PlayerHand.Remove(card);
-            Log.Add(new LogEntry(card.ToString(), LogEntryType.CardPlayed));
+            Log.AddCard(card);
 
             var accomplishableMissions = AvaliableMissions.Where(mission => mission.CanBeCompleted(new CardSet(Piles))).ToList();
             foreach (var mission in accomplishableMissions)
@@ -82,7 +75,7 @@ namespace Cahoots.Core
 
             if (accomplishableMissions.Any())
             {
-                Log.Add(new LogEntry(string.Join(", ", accomplishableMissions), LogEntryType.MissionAccomplished));
+                Log.AddMissions(accomplishableMissions);
             }
         }
 

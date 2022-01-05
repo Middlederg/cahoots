@@ -10,7 +10,7 @@
                 @if (game.CompletedMissions.Any())
                 {
                     <div class="border-2 border-green-600 bg-green-200 text-green-900 px-4 py-2 text-center rounded-xl font-semibold text-xs md:text-base">
-                        @game.LastMission
+                        @game.Log.LastMission
                     </div>
                 }
 
@@ -38,14 +38,15 @@
 
             @if (game.GameHasEnded())
             {
-                <div class="font-bold text-xl">
-                    <span>End of game</span>
+                <div class="flex flex-col justify-center p-8 space-y-4">
+                    <h6 class="font-bold text-xl color-slate-700">End of game</h6>
+                    <p class="tracking-wider font-thin color-slate-500">@game.CompletedMissions.Count missions</p>
+                    <p class="tracking-wider font-thin color-slate-500">@game.CompletedMissions.Count missions</p>
                 </div>
             }
             else
             {
                 <Hand @ref="handComponent" OnCardSelected="CardSelected" />
-
             }
 
         </CascadingValue>
@@ -60,11 +61,24 @@
 
     [Parameter]
     [SupplyParameterFromQuery]
-    public string Handsize { get; set; }
+    public string HandSize { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string DeckSize { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string MissionDeckSize { get; set; }
 
     protected override void OnInitialized()
     {
-        game = new Game(new GameOptions() { HandSize = int.Parse(Handsize) });
+        game = new Game(new GameOptions() 
+        {
+            HandSize = int.Parse(HandSize), 
+            DeckSize = int.Parse(DeckSize), 
+            MissionDeckSize = int.Parse(MissionDeckSize) 
+        });
     }
 
     private void CardSelected(Core.Card card)

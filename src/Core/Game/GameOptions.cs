@@ -1,14 +1,35 @@
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace Cahoots.Core
 {
-    public class GameOptions
+    public class GameOptions : IValidatableObject
     {
+        [Range(PlayerHand.MinSize, PlayerHand.MaxSize)]
         public int HandSize { get; set; }
-        public int MissionCount = 4;
-        public int PileCount = 4;
+
+        [Range(PlayerHand.MaxSize + PileCount, Deck.DefaultSize)]
+        public int DeckSize { get; set; }
+
+        [Range(AvaliableMissionCount, MissionFactory.DefaultMissionSize)]
+        public int MissionDeckSize { get; set; }
+
+        public const int AvaliableMissionCount = 4;
+        public const int PileCount = 4;
 
         public GameOptions()
         {
-            HandSize = 4;
+            HandSize = 5;
+            DeckSize = 56;
+            MissionDeckSize = 54;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (HandSize > DeckSize)
+            {
+                yield return new ValidationResult("Hand size can not be greater than deck size", new[] { nameof(HandSize), nameof(DeckSize) });
+            }
         }
     }
 }

@@ -5,51 +5,80 @@
 <div class="@Styles.Container">
     <div class="w-full max-w-3xl flex flex-col">
 
-        <div class="lg:my-3 xl:my-6 text-center">
+        <div class="lg:my-3 xl:my-6">
             <span class="@Styles.Title">
                 Prepare game
             </span>
         </div>
 
-        <div class="mt-6 w-full max-w-3xl flex flex-col md:flex-row md:justify-evenly space-y-4 md:space-y-0">
+        <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+            <div class="mt-6 w-full max-w-3xl flex flex-col space-y-8">
 
-            <div class="flex items-center space-y-1">
+                <DataAnnotationsValidator />
 
-                <div class="w-52">
-                    <span class="@Styles.SubTitle">
+                <div class="flex items-center space-x-8">
 
-                        Hand size
-                    </span>
+                    <div class="max-w-xs w-full text-right">
+                        <span class="@Styles.SubTitle">
+                            Hand size
+                        </span>
+                    </div>
+                    <div class="max-w-xs w-full">
+                        <InputNumber class="@Styles.Input" @bind-Value="model.HandSize" />
+                        <span class="@Styles.ValidationError">
+                            <ValidationMessage For="() => model.HandSize" />
+                        </span>
+                    </div>
                 </div>
+                <div class="flex items-center space-x-8">
 
-                <input type="number"
-                       class="font-semibold block w-full px-2 py-1.5 border border-slate-400 rounded-md text-sm shadow-sm
-                          focus:outline-none
-                          focus:border-slate-500"
-                       @bind="model.HandSize"
-                       min="2"
-                       max="6" />
+                    <div class="max-w-xs w-full text-right">
+                        <span class="@Styles.SubTitle">
+                            Deck size
+                        </span>
+                    </div>
 
+                    <div class="max-w-xs w-full">
+                        <InputNumber class="@Styles.Input" @bind-Value="model.DeckSize" />
+                        <span class="@Styles.ValidationError">
+                            <ValidationMessage For="() => model.DeckSize" class="@Styles.ValidationError" />
+                        </span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <div class="max-w-xs w-full text-right">
+                        <span class="@Styles.SubTitle">
+                            Mission deck size
+                        </span>
+                    </div>
+
+                    <div class="max-w-xs w-full">
+                        <InputNumber type="number" class="@Styles.Input" @bind-Value="model.MissionDeckSize" />
+                        <span class="@Styles.ValidationError">
+                            <ValidationMessage For="() => model.MissionDeckSize" class="@Styles.ValidationError" />
+                        </span>
+                    </div>
+
+                </div>
             </div>
 
-        </div>
+            <div class="flex-1 max-h-40">
+            </div>
 
-        <div class="flex-1 max-h-40">
-        </div>
-
-        <div class="mt-10 flex justify-between space-x-6">
-            <button @onclick="@Play" class="bg-slate-700 text-white hover:bg-slate-500 font-semibold outline-none focus:outline-none rounded-xl
+            <div class="mt-10 flex justify-between space-x-6">
+                <button type="submit" class="bg-slate-700 text-white hover:bg-slate-500 font-semibold outline-none focus:outline-none rounded-xl
                                             w-full p-2 md:p-4 md:text-xl md:text-2xl uppercase outline-none focus:outline-none flex items-center justify-center">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="play w-6 h-6 mr-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="play w-6 h-6 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
 
 
-                <span class="ml-1">Play</span>
-            </button>
+                    <span class="ml-1">Play</span>
+                </button>
 
-        </div>
+            </div>
+        </EditForm>
     </div>
 </div>
 
@@ -57,6 +86,22 @@
 {
     private GameOptions model = new GameOptions();
 
-    private void Play() => navigationManager.NavigateTo("play/?handsize=" + model.HandSize);
-    
+    private void HandleValidSubmit()
+    {
+        string parameters = CreateParams(
+            new Parameter(nameof(model.HandSize), model.HandSize),
+            new Parameter(nameof(model.DeckSize), model.DeckSize),
+            new Parameter(nameof(model.MissionDeckSize), model.MissionDeckSize)
+        );
+
+        navigationManager.NavigateTo($"play/?{parameters}");
+    }
+
+    private string CreateParams(params Parameter[] parameters) => string.Join("&", parameters.ToList());
+
+    record Parameter(string Name, int Value)
+    {
+        public override string ToString() => $"{Name}={Value}";
+    }
+
 }

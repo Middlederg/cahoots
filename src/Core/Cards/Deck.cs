@@ -1,17 +1,18 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Cahoots.Core
 {
-    public static class CardFactory
+    public static class Deck
     {
-        public static IEnumerable<Card> Create()
-        {
+        public const int DefaultSize = 56;
 
-            var one = CreateOnce();
-            var two = CreateOnce();
-            var deck = one.Concat(two).ToList();
-            return Randomizer.RandomizeList(deck);
+        public static IEnumerable<Card> Create(int maxSize)
+        {
+            var deck = CreateOnce().Concat(CreateOnce()).ToList();
+            int size = Math.Min(maxSize, deck.Count);
+            return Randomizer.RandomizeList(deck).Take(size);
         }
 
         private static IEnumerable<Card> CreateOnce()
