@@ -31,5 +31,15 @@ namespace Cahoots.Core
                 yield return new ValidationResult("Hand size can not be greater than deck size", new[] { nameof(HandSize), nameof(DeckSize) });
             }
         }
+
+        public Dictionary<string, object> CreateParameters()
+        {
+            return new Dictionary<string, object>()
+            {
+                { nameof(HandSize), HandSize },
+                { nameof(DeckSize), DeckSize },
+                { nameof(MissionDeckSize), MissionDeckSize },
+            };
+        }
     }
 }

@@ -88,20 +88,8 @@
 
     private void HandleValidSubmit()
     {
-        string parameters = CreateParams(
-            new Parameter(nameof(model.HandSize), model.HandSize),
-            new Parameter(nameof(model.DeckSize), model.DeckSize),
-            new Parameter(nameof(model.MissionDeckSize), model.MissionDeckSize)
-        );
-
-        navigationManager.NavigateTo($"play/?{parameters}");
+        var parameters = model.CreateParameters();
+        var uri = navigationManager.GetUriWithQueryParameters("/play", model.CreateParameters());
+        navigationManager.NavigateTo(uri);
     }
-
-    private string CreateParams(params Parameter[] parameters) => string.Join("&", parameters.ToList());
-
-    record Parameter(string Name, int Value)
-    {
-        public override string ToString() => $"{Name}={Value}";
-    }
-
 }

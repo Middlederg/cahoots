@@ -38,10 +38,9 @@
 
             @if (game.GameHasEnded())
             {
-                <div class="flex flex-col justify-center p-8 space-y-4">
+                <div class="flex flex-col justify-center p-8 space-y-2">
                     <h6 class="font-bold text-xl color-slate-700">End of game</h6>
-                    <p class="tracking-wider font-thin color-slate-500">@game.CompletedMissions.Count missions</p>
-                    <p class="tracking-wider font-thin color-slate-500">@game.CompletedMissions.Count missions</p>
+                    <p class="tracking-wider font-thin color-slate-500">@game.CompletedMissions.Count missions accomplished</p>
                 </div>
             }
             else
@@ -59,16 +58,13 @@
     private Piles pilesComponent;
     private Hand handComponent;
 
-    [Parameter]
-    [SupplyParameterFromQuery]
+    [Parameter, SupplyParameterFromQuery]
     public string HandSize { get; set; }
 
-    [Parameter]
-    [SupplyParameterFromQuery]
+    [Parameter, SupplyParameterFromQuery]
     public string DeckSize { get; set; }
 
-    [Parameter]
-    [SupplyParameterFromQuery]
+    [Parameter, SupplyParameterFromQuery]
     public string MissionDeckSize { get; set; }
 
     protected override void OnInitialized()

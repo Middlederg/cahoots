@@ -70,7 +70,11 @@ namespace Cahoots.Core
             {
                 CompletedMissions.Add(mission);
                 AvaliableMissions.Remove(mission);
-                AvaliableMissions.Add(DrawMission());
+
+                if (missionDeck.Any())
+                {
+                    AvaliableMissions.Add(DrawMission());
+                }
             }
 
             if (accomplishableMissions.Any())
@@ -81,6 +85,11 @@ namespace Cahoots.Core
 
         public bool GameHasEnded()
         {
+            if (!AvaliableMissions.Any())
+            {
+                return true;
+            }
+
             foreach (var card in PlayerHand.Cards)
             {
                 foreach (var pile in Piles)
