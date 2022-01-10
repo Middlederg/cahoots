@@ -17,11 +17,11 @@ namespace Cahoots.Core
 
         public bool CanBeCompleted(CardSet cardSet)
         {
-            if (numbers || cardSet.NumberCount != 4)
+            if (numbers && cardSet.NumberCount != 4)
             {
                 return false;
             }
-            if (colors || cardSet.ColorCount != 4)
+            if (colors && cardSet.ColorCount != 4)
             {
                 return false;
             }
