@@ -22,7 +22,7 @@ namespace Cahoots.Core
 
         public int NumberCount => cards.Select(x => x.Number).Distinct().Count();
         public int ColorCount => cards.Select(x => x.Color).Distinct().Count();
-        public bool AllAreGreaterThan(int minimun) => cards.All(x => x.Number > minimun);
+        public bool AllAreGreaterThan(int minimun) => cards.All(x => x.Number >= minimun);
         public bool AllAreLowerThan(int maximun) => cards.All(x => x.Number < maximun);
         public bool HasEvenOddAlternance()
         {

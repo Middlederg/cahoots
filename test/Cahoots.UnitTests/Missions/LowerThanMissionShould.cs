@@ -29,7 +29,7 @@ namespace Cahoots.UnitTests
         }
 
         [Fact]
-        public void Not_be_completed_when_any_cards_is_greater_or_equal_5()
+        public void Not_be_completed_when_any_card_is_greater_or_equal_5()
         {
             var setCollection = new List<CardSet>() 
             {
@@ -49,4 +49,5 @@ namespace Cahoots.UnitTests
             }
         }
     }
+
 }
