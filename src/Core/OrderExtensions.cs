@@ -3,34 +3,21 @@ using System.Linq;
 
 namespace Cahoots.Core
 {
-    public static class OrderExtensions
+    public static class LadderExtensions
     {
-        public static int AscendingCount(IEnumerable<int> numbers)
+        public static int Count(IEnumerable<int> numbers)
         {
             int last = numbers.First() - 1;
             int count = 0;
-            foreach(int number in numbers)
+            foreach(int currentNumber in numbers)
             {
-                int expected = last + 1;
-                if (number == expected)
+                if (currentNumber != last + 1)
                 {
-                    count++;
+                    return count;
                 }
-            }
-            return count;
-        }
-        public static int DescendingCount(IEnumerable<int> numbers)
-        {
-            numbers = numbers.Distinct().OrderByDescending(x => x);
-            int last = numbers.First() + 1;
-            int count = 0;
-            foreach(int number in numbers)
-            {
-                int expected = last - 1;
-                if (number == expected)
-                {
-                    count++;
-                }
+
+                count++;
+                last++;
             }
             return count;
         }

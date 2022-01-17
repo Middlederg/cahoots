@@ -5,12 +5,12 @@ namespace Cahoots.Core
 {
     public class MatchColorMission : IMission
     {
-        private readonly IEnumerable<Color> matchColors;
+        private readonly Color[] matchColors;
         private readonly int objective;
 
         public MatchColorMission(int objective, params Color[] matchColors)
         {
-            this.matchColors = matchColors.ToList();
+            this.matchColors = matchColors;
             this.objective = objective;
         }
 

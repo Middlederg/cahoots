@@ -18,8 +18,11 @@ namespace Cahoots.Core
             .Sum(x => x.Number);
 
         public bool AllAreEven() => cards.All(x => x.IsEven);
-        public int FromColor(IEnumerable<Color> color) => cards.Count(x => color.Contains(x.Color));
+        public bool AllAreOdd() => cards.All(x => !x.IsEven);
+        public int FromColor(params Color[] colors) => cards.Count(x => colors.Contains(x.Color));
+        public bool Includes(Color color) => cards.Any(x => color == x.Color);
 
+        public int Count => cards.Count();
         public int NumberCount => cards.Select(x => x.Number).Distinct().Count();
         public int ColorCount => cards.Select(x => x.Color).Distinct().Count();
         public bool AllAreGreaterThan(int minimun) => cards.All(x => x.Number >= minimun);
@@ -40,28 +43,39 @@ namespace Cahoots.Core
 
         public int UnorderedLadderCount()
         {
-            var numbers = cards.Select(x => x.Number);
-            var ascending = numbers.Distinct().OrderBy(x => x);
-            int ascendingCount = OrderExtensions.AscendingCount(ascending);
-            var descending = numbers.Distinct().OrderBy(x => x);
-            int descendingCount = OrderExtensions.DescendingCount(descending);
+            var numbers = cards
+                .Select(x => x.Number)
+                .Distinct()
+                .OrderBy(x => x)
+                .ToList();
 
-            return Math.Max(ascendingCount, descendingCount);
+            var options = GetLadderCountOptions(numbers);
+            return options.Max();
         }
 
-        // public int OrderedAscendingLadderCount()
-        // {
-        //     var numbers = cards.Select(x => x.Number).ToList();
-        //     int ascendingCount = OrderExtensions.AscendingCount(numbers);
+        public int OrderedLadderCount()
+        {
+            var numbers = cards
+                .Select(x => x.Number)
+                .ToList();
 
-        //     for (int i = 0; i < numbers.Count; i++)
-        //     {
-                
-        //         OrderExtensions.AscendingCount(numbers.RemoveAt(i));
-        //     }
-        //     int descendingCount = OrderExtensions.DescendingCount(numbers);
+            var options = GetLadderCountOptions(numbers);
+            return options.Max();
+        }
 
-        //     return Math.Max(ascendingCount, descendingCount);
-        // }
+        private IEnumerable<int> GetLadderCountOptions(List<int> numbers)
+        {
+                while (numbers.Any())
+                {
+                    yield return LadderExtensions.Count(numbers);
+                    numbers = numbers.Skip(1).ToList();
+                }
+            
+        }
+
+        public Color ColorAt(int index)
+        {
+            return cards.ElementAt(index).Color;
+        }
     }
 }
