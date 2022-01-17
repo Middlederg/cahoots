@@ -13,5 +13,7 @@
         {
             return cardSet.OrderedLadderCount() >= objective;
         }
+
+        public override string ToString() => "Ord. Ladder";
     }
 }

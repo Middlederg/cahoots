@@ -19,6 +19,6 @@ namespace Cahoots.Core
             return cardSet.FromColor(matchColors) == objective;
         }
 
-        public override string ToString() => $"{string.Join(" / ", matchColors.Select(x => $"[#{x.Hex}]")) } x{objective}";
+        public override string ToString() => $"{string.Join(" / ", matchColors.ToList())} x{objective}";
     }
 }

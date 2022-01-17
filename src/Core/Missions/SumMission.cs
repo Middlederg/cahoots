@@ -22,7 +22,7 @@ namespace Cahoots.Core
             {
                 return $"Sum = {objective}";
             }
-            return $"Sum [{color.Hex}] = {objective}";
+            return $"Sum {color} = {objective}";
         }
     }
 }

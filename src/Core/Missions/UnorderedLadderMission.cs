@@ -13,5 +13,7 @@
         {
             return cardSet.UnorderedLadderCount() >= objective;
         }
+
+        public override string ToString() => "Unord. Ladder";
     }
 }

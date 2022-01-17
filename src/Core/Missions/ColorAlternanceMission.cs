@@ -25,5 +25,8 @@
 
             return false;
         }
+
+        public override string ToString() => $"{color} {Color.White} {color} {Color.White}";
+        
     }
 }

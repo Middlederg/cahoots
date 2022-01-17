@@ -20,5 +20,7 @@
             int twiceTotal = cardSet.TotalSum(twice);
             return simpleTotal * 2  == twiceTotal;
         }
+
+        public override string ToString() => $"{simple} x2 = {twice}";
     }
 }

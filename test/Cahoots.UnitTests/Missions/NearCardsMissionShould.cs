@@ -17,7 +17,7 @@ namespace Cahoots.UnitTests
                 CardSetMother.Create(CardMother.Blue5, CardMother.Green3, CardMother.Red1, CardMother.Red6),
             };
 
-            var mission = new NearCardsMission(2, Color.Red);
+            var mission = new NearCardsMission(Color.Red);
 
             foreach (var cardSet in setCollection)
             {
@@ -42,7 +42,7 @@ namespace Cahoots.UnitTests
                 CardSetMother.Create(CardMother.Green5, CardMother.Red2, CardMother.Red4, CardMother.Red4),
             };
 
-            var mission = new NearCardsMission(2, Color.Red);
+            var mission = new NearCardsMission(Color.Red);
 
             foreach (var cardSet in setCollection)
             {

@@ -2,12 +2,10 @@
 {
     public class NearCardsMission : IMission
     {
-        private readonly int objective;
         private readonly Color color;
 
-        public NearCardsMission(int objective, Color color)
+        public NearCardsMission(Color color)
         {
-            this.objective = objective;
             this.color = color;
         }
 
@@ -30,5 +28,7 @@
 
             return false;
         }
+
+        public override string ToString() => $"{color} {color} {Color.White} {Color.White}";
     }
 }

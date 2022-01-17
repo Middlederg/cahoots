@@ -34,5 +34,8 @@ namespace Cahoots.Core
             }
         }
 
+
+        public override string ToString() => string.Join(" = ", colors);
+
     }
 }

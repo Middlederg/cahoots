@@ -5,14 +5,16 @@ namespace Cahoots.Core
     public record Color
     {
         public string Hex { get; }
+
         private Color(string hex)
         {
-            Hex = hex;
+            this.Hex = hex;
         }
         public static Color Red => new Color("D82E18");
         public static Color Orange => new Color("E4A102");
         public static Color Green => new Color("337558");
         public static Color Blue => new Color("1171D2");
+        public static Color White => new Color("fff");
 
         public static IEnumerable<Color> Colors
         {
@@ -24,5 +26,7 @@ namespace Cahoots.Core
                 yield return Blue;
             }
         }
+
+        public override string ToString() => $"[#{Hex}]";
     }
 }
