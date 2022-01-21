@@ -11,7 +11,7 @@ namespace Cahoots.Core
         [Range(PlayerHand.MaxSize + PileCount, Deck.DefaultSize)]
         public int DeckSize { get; set; }
 
-        [Range(AvaliableMissionCount, MissionFactory.DefaultMissionSize)]
+        [Range(AvaliableMissionCount, MissionDeck.DefaultMissionSize)]
         public int MissionDeckSize { get; set; }
 
         public const int AvaliableMissionCount = 4;

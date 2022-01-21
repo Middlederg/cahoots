@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Cahoots.Core
 {
-    public static class MissionFactory
+    public static class MissionDeck
     {
         public const int DefaultMissionSize = 54;
 

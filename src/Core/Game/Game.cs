@@ -28,7 +28,7 @@ namespace Cahoots.Core
 
             Piles = Enumerable.Range(0, GameOptions.PileCount).Select(i => new Pile(DrawCard())).ToList();
 
-            missionDeck = MissionFactory.Create(options.MissionDeckSize).ToList();
+            missionDeck = MissionDeck.Create(options.MissionDeckSize).ToList();
             AvaliableMissions = Enumerable.Range(1, GameOptions.AvaliableMissionCount).Select(i => DrawMission()).ToList();
             CompletedMissions = new List<IMission>();
 

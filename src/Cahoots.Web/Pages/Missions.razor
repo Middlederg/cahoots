@@ -1,0 +1,35 @@
+﻿@page "/missions"
+
+<PageTitle>Avaliable missions</PageTitle>
+
+<div class="@Styles.Container">
+
+    <div class="w-full max-w-3xl flex flex-col">
+
+        <div class="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-4">
+
+            @foreach (var mission in missions)
+            {
+                <button @onclick="() => MissionClicked(mission)">
+                    <div class="flex justify-center">
+                        <MissionCard InnerMission="mission" />
+                    </div>
+                </button>
+            }
+        </div>
+    </div>
+</div>
+@code {
+
+    private IEnumerable<IMission> missions;
+
+    protected override void OnInitialized()
+    {
+        missions = MissionDeck.GetAllMissions();
+    }
+
+    private void MissionClicked(IMission mission)
+    {
+
+    }
+}
