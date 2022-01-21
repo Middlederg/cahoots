@@ -1,14 +1,25 @@
-﻿<div class="w-full text-white bg-slate-700 flex justify-center">
+﻿<header class="w-full text-white bg-slate-700 flex justify-center">
     <div class="w-full max-w-3xl flex flex-col">
         <div class="flex flex-row items-center justify-between py-2 md:py-3 px-4 md:px-8">
             <div class="flex flex-row items-center justify-between">
-                <NavLink class="text-lg font-semibold tracking-widest
-      text-white hover:text-slate-100 uppercase rounded-lg focus:outline-none focus:shadow-outline"
+                <NavLink class="text-lg font-semibold tracking-widest text-white hover:text-slate-100 uppercase rounded-lg focus:outline-none focus:shadow-outline"
                          href="" Match="NavLinkMatch.All">
                     Cahoots
                 </NavLink>
             </div>
-            <nav class="flex justify-end items-center flex-row">
+            <div class="sm:hidden flex items-center">
+                <button class="p-1 border-2 rounded" @onclick="ToggleMenu">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24" 
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="4" y1="6" x2="20" y2="6" />
+                        <line x1="4" y1="12" x2="20" y2="12" />
+                        <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <nav class="hidden sm:flex justify-end items-center flex-row">
                 <NavLink class="flex px-4 py-2 text-sm font-semibold rounded-lg outline-none focus:outline-none"
                          href="prepareGame" ActiveClass=" text-slate-900  bg-white  hover:bg-slate-50">
 
@@ -16,7 +27,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    <span class="hidden md:block">
+                    <span>
                         New game
                     </span>
 
@@ -26,14 +37,14 @@
                          href="missions" ActiveClass="text-slate-900  bg-white hover:bg-slate-50">
 
                     <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 md:mr-2"
+                         class="h-5 w-5 md:mr-2"
                          viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />
                         <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />
                         <circle cx="15" cy="9" r="1" />
                     </svg>
-                    <span class="hidden md:block">
+                    <span>
                         Avaliable missions
                     </span>
                 </NavLink>
@@ -44,11 +55,74 @@
                     <svg class="w-5 h-5 md:mr-2" fill="currentColor" stroke="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
                         <path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5c0 .538-.012 1.05-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33.076 33.076 0 0 1 2.5.5zm.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935zm10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935zM3.504 1c.007.517.026 1.006.056 1.469.13 2.028.457 3.546.87 4.667C5.294 9.48 6.484 10 7 10a.5.5 0 0 1 .5.5v2.61a1 1 0 0 1-.757.97l-1.426.356a.5.5 0 0 0-.179.085L4.5 15h7l-.638-.479a.501.501 0 0 0-.18-.085l-1.425-.356a1 1 0 0 1-.757-.97V10.5A.5.5 0 0 1 9 10c.516 0 1.706-.52 2.57-2.864.413-1.12.74-2.64.87-4.667.03-.463.049-.952.056-1.469H3.504z" />
                     </svg>
-                    <span class="hidden md:block">
+                    <span>
                         Records
                     </span>
                 </NavLink>
             </nav>
         </div>
+        <div class="@(showMenu ? "" : "hidden")">
+             <nav class="flex flex-col space-y-2 justify-end items-center flex-row mx-auto py-2">
+                <NavLink class="flex items-center justify-center space-x-2 max-w-xs w-full px-4 py-2 text-sm uppercase font-semibold rounded-lg outline-none focus:outline-none"
+                         href="prepareGame" ActiveClass="text-slate-900 bg-white  hover:bg-slate-50">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                      <circle cx="12" cy="5" r="2" />
+                      <path d="M20 12.5v4.75a0.734 .734 0 0 1 -.055 .325a0.704 .704 0 0 1 -.348 .366l-5.462 2.58a4.998 4.998 0 0 1 -4.27 0l-5.462 -2.58a0.705 .705 0 0 1 -.401 -.691l-.002 -4.75" />
+                      <path d="M4.431 12.216l5.634 -2.332a5.065 5.065 0 0 1 3.87 0l5.634 2.332a0.692 .692 0 0 1 .028 1.269l-5.462 2.543a5.064 5.064 0 0 1 -4.27 0l-5.462 -2.543a0.691 .691 0 0 1 .028 -1.27z" />
+                      <line x1="12" y1="7" x2="12" y2="13" />
+                    </svg>
+                    <span>
+                        New game
+                    </span>
+
+                </NavLink>
+
+                <NavLink class="flex items-center justify-center space-x-2 max-w-xs w-full px-4 py-2 text-sm uppercase font-semibold rounded-lg outline-none focus:outline-none"
+                         href="missions" ActiveClass="text-slate-900 bg-white hover:bg-slate-50">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-5 w-5"
+                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3" />
+                        <path d="M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3" />
+                        <circle cx="15" cy="9" r="1" />
+                    </svg>
+                    <span>
+                       Avaliable missions
+                    </span>
+
+                </NavLink>
+
+                <NavLink class="flex items-center justify-center space-x-2 max-w-xs w-full px-4 py-2 text-sm uppercase font-semibold rounded-lg outline-none focus:outline-none"
+                         href="scores" ActiveClass="text-slate-900 bg-white  hover:bg-slate-50">
+          
+                    <svg class="w-5 h-5" 
+                    fill="none" stroke="currentColor" 
+                    viewBox="0 0 24 24" 
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                    stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    <span>
+                        Best scores
+                    </span>
+
+                </NavLink>
+
+            </nav>
+        </div>
     </div>
-</div>
+</header>
+
+@code {
+    private bool showMenu = false;
+
+    private void ToggleMenu()
+    {
+        showMenu = !showMenu;    
+    }
+}
