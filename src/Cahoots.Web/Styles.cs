@@ -1,5 +1,6 @@
 ﻿public class Styles
 {
+    public const string DefaultIcon = "w-6 h-6";
     public const string Link = "text-xs font-bold text-indigo-600 hover:text-indigo-800 lg:text-base";
     public const string Title = $"text-slate-700 font-semibold uppercase text-xl xl:text-4xl";
     public const string SubTitle = $"text-sm text-slate-600 tracking-widest lg:text-lg";
