@@ -1,0 +1,33 @@
+﻿
+<Dialog @ref="dialog">
+    <Header>
+        Accomplished missions
+    </Header>
+
+    <Body>
+        <div class="grid grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 md:gap-4">
+
+            @foreach (var mission in Missions)
+            {
+                <div class="flex justify-center">
+                    <MissionCard InnerMission="mission" />
+                </div>
+            }
+        </div>
+    </Body>
+    <Footer>
+         <button class="@Styles.PrimaryButton"
+                        @onclick="() => dialog.hidden = true">
+             Close
+         </button>
+    </Footer>
+</Dialog>
+
+@code {
+    private Dialog dialog;
+
+    [Parameter]
+    public IEnumerable<IMission> Missions { get; set; }
+
+    public void Show() => dialog.hidden = false;
+}

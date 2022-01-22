@@ -3,28 +3,26 @@
 <PageTitle>Cahoots</PageTitle>
 
 <article class="@Styles.Container">
-    <div class="w-full max-w-3xl flex flex-col">
+    <div class="w-full flex flex-col">
         <CascadingValue Value="game">
 
-            <div class="flex justify-between items-center py-2 px-4 md:px-8">
-                @if (game.CompletedMissions.Any())
-                {
-                    <div class="border-2 border-green-600 bg-green-200 text-green-900 px-4 py-2 text-center rounded-xl font-semibold text-xs md:text-base">
-                        @game.Log.LastMission
-                    </div>
-                }
+            <div class="max-w-3xl flex justify-between items-center py-2 px-4 md:px-8">
 
                 <div class="font-bold text-sm md:text-base xl:text-xl">
                     <span></span>
                 </div>
 
 
-                <div class="bg-slate-300 rounded-xl font-bold text-slate-700 px-4 py-1">
-                    @game.CompletedMissions.Count missions
-                </div>
+                @if (game.CompletedMissions.Any())
+                {
+                    <button class="@Styles.SecondaryInlineButton" @onclick="() => dialog.Show()">
+                        @game.CompletedMissions.Count missions
+                    </button>
+                }
+
             </div>
 
-            <div class="grid grid-cols-@game.AvaliableMissions.Count gap-2 my-2">
+            <div class="max-w-3xl grid grid-cols-@game.AvaliableMissions.Count gap-2 my-2">
 
                 @foreach (var mission in game.AvaliableMissions)
                 {
@@ -51,12 +49,16 @@
         </CascadingValue>
     </div>
 </article>
+
+<MissionListDialog @ref="dialog" Missions="game.CompletedMissions" />
+
 @code {
 
     private Game game;
 
     private Piles pilesComponent;
     private Hand handComponent;
+    private MissionListDialog dialog;
 
     [Parameter, SupplyParameterFromQuery]
     public string HandSize { get; set; }
@@ -69,12 +71,12 @@
 
     protected override void OnInitialized()
     {
-        game = new Game(new GameOptions() 
-        {
-            HandSize = int.Parse(HandSize), 
-            DeckSize = int.Parse(DeckSize), 
-            MissionDeckSize = int.Parse(MissionDeckSize) 
-        });
+        game = new Game(new GameOptions()
+            {
+                HandSize = int.Parse(HandSize),
+                DeckSize = int.Parse(DeckSize),
+                MissionDeckSize = int.Parse(MissionDeckSize)
+            });
     }
 
     private void CardSelected(Core.Card card)
