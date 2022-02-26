@@ -19,6 +19,20 @@ namespace Cahoots.Core
             return cardSet.FromColor(matchColors) == objective;
         }
 
-        public override string ToString() => $"{string.Join(" / ", matchColors.ToList())} x{objective}";
+        public string Description() => $"{string.Join(" / ", matchColors.ToList())} x{objective}";
+
+        public IEnumerable<IDisplayableItem> Display()
+        {
+            foreach ((Color color, int index) in matchColors.Select((x, index) => (x, index)))
+            {
+                yield return color;
+                if (index < matchColors.Length)
+                {
+                    yield return TextItem.Or;
+                }
+            }
+
+            yield return TextItem.Times(objective);
+        }
     }
 }

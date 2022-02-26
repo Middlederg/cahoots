@@ -1,13 +1,13 @@
-﻿namespace Cahoots.Core
+﻿using System.Collections.Generic;
+
+namespace Cahoots.Core
 {
     public class ColorAlternanceMission : IMission
     {
-        private readonly int objective;
         private readonly Color color;
 
-        public ColorAlternanceMission(int objective, Color color)
+        public ColorAlternanceMission(Color color)
         {
-            this.objective = objective;
             this.color = color;
         }
 
@@ -26,7 +26,17 @@
             return false;
         }
 
-        public override string ToString() => $"{color} {Color.White} {color} {Color.White}";
-        
+        public string Description() => $"Alternating piles are {color}";
+
+        public IEnumerable<IDisplayableItem> Display() => new List<IDisplayableItem>()
+        {
+            color,
+            TextItem.Separator,
+            Color.Any,
+            TextItem.Separator,
+            Color.Any,
+            TextItem.Separator,
+            color,
+        };
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Cahoots.Core
+﻿using System.Collections.Generic;
+
+namespace Cahoots.Core
 {
     public class DoubleSumMission : IMission
     {
@@ -21,6 +23,15 @@
             return simpleTotal * 2  == twiceTotal;
         }
 
-        public override string ToString() => $"{simple} x2 = {twice}";
+        public string Description() => $"Sum of {simple} x 2 = Sum of {twice}";
+
+        public IEnumerable<IDisplayableItem> Display() => new List<IDisplayableItem>()
+        {
+            Icon.Sum,
+            simple,
+            TextItem.Twice,
+            TextItem.Equal,
+            twice,
+        };
     }
 }

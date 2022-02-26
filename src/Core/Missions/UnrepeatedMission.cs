@@ -17,17 +17,16 @@ namespace Cahoots.Core
 
         public bool CanBeCompleted(CardSet cardSet)
         {
-            if (numbers && cardSet.NumberCount != 4)
+            if (numbers && cardSet.NumberCount != cardSet.Count)
             {
                 return false;
             }
-            if (colors && cardSet.ColorCount != 4)
+            if (colors && cardSet.ColorCount != cardSet.Count)
             {
                 return false;
             }
             return true;
         }
-
 
         public override string ToString()
         {
@@ -40,7 +39,7 @@ namespace Cahoots.Core
                 {
                     yield return "all numbers";
                 }
-                if (numbers)
+                if (colors)
                 {
                     yield return "all colors";
                 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Cahoots.Core
 {
     public class LowerThanMission : IMission
@@ -11,6 +13,12 @@ namespace Cahoots.Core
 
         public bool CanBeCompleted(CardSet cardSet) => cardSet.AllAreLowerThan(maximun);
 
-        public override string ToString() => $"< {maximun}";
+        public string Description() => $"< {maximun}";
+
+        public IEnumerable<IDisplayableItem> Display() => new List<IDisplayableItem>()
+        {
+            TextItem.GreaterThan,
+            new TextItem(maximun.ToString()),
+        };
     }
 }

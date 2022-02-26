@@ -1,4 +1,6 @@
-﻿namespace Cahoots.Core
+﻿using System.Collections.Generic;
+
+namespace Cahoots.Core
 {
     public class NearCardsMission : IMission
     {
@@ -29,6 +31,18 @@
             return false;
         }
 
-        public override string ToString() => $"{color} {color} {Color.White} {Color.White}";
+        public string Description() => $"Two piles in a row are {color}";
+
+
+        public IEnumerable<IDisplayableItem> Display() => new List<IDisplayableItem>()
+        {
+            color,
+            TextItem.Separator,
+            color,
+            TextItem.Separator,
+            Color.Any,
+            TextItem.Separator,
+            Color.Any,
+        };
     }
 }

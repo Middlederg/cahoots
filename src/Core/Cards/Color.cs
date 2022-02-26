@@ -2,19 +2,22 @@ using System.Collections.Generic;
 
 namespace Cahoots.Core
 {
-    public record Color
+    public record Color : IDisplayableItem
     {
         public string Hex { get; }
 
-        private Color(string hex)
+        private readonly string name;
+
+        private Color(string hex, string name)
         {
-            this.Hex = hex;
+            Hex = hex;
+            this.name = name;
         }
-        public static Color Red => new Color("D82E18");
-        public static Color Orange => new Color("E4A102");
-        public static Color Green => new Color("337558");
-        public static Color Blue => new Color("1171D2");
-        public static Color White => new Color("fff");
+        public static Color Red => new Color(nameof(Red), "D82E18");
+        public static Color Orange => new Color(nameof(Orange), "E4A102");
+        public static Color Green => new Color(nameof(Green), "337558");
+        public static Color Blue => new Color(nameof(Blue), "1171D2");
+        public static Color Any => new Color(nameof(Any), "fff");
 
         public static IEnumerable<Color> Colors
         {
@@ -27,6 +30,8 @@ namespace Cahoots.Core
             }
         }
 
-        public override string ToString() => $"[#{Hex}]";
+        //public string Code => $"[#{Hex}]";
+
+        public override string ToString() => name;
     }
 }

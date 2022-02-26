@@ -42,9 +42,9 @@ namespace Cahoots.Core
             yield return new DoubleSumMission(Color.Blue, Color.Orange);
             yield return new DoubleSumMission(Color.Green, Color.Orange);
             yield return new DoubleSumMission(Color.Orange, Color.Red);
-            yield return new ColorAlternanceMission(2, Color.Green);
-            yield return new ColorAlternanceMission(2, Color.Blue);
-            yield return new ColorAlternanceMission(2, Color.Orange);
+            yield return new ColorAlternanceMission(Color.Green);
+            yield return new ColorAlternanceMission(Color.Blue);
+            yield return new ColorAlternanceMission(Color.Orange);
             yield return new NearCardsMission(Color.Orange);
             yield return new NearCardsMission(Color.Green);
             yield return new NearCardsMission(Color.Red);
