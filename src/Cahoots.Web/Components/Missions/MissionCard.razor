@@ -1,10 +1,13 @@
 ﻿<div class="w-16 h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 outline-none
        rounded-lg p-1 md:p-1.5 border-slate-500 border-2"
-    title="@InnerMission.ToString()">
+    title="@InnerMission.Description()">
     <span class="bg-slate-300 w-full h-full flex items-center justify-center rounded-lg">
         <span class="text-xs md:text-sm text-center">
             <span class="flex flex-wrap">
-                @((MarkupString)Text())
+            @foreach(var item in InnerMission.Display())
+            {
+                <DisplayItemRenderer Item="item" /> 
+            }
             </span>
         </span>
     </span>&nbsp;
@@ -14,26 +17,4 @@
 
     [Parameter]
     public IMission InnerMission { get; set; }
-
-    private string Text()
-    {
-        InnerMission.GetTextItems().Select(x =>
-        {
-            s
-        });
-
-        string text = InnerMission.ToString();
-        while (text.Contains("["))
-        {
-            string color = text.Substring(text.IndexOf('['), text.IndexOf(']') - text.IndexOf('[') + 1);
-            string replacedColor = ColoredSpan(color.Replace("[", "").Replace("]", ""));
-            text = text.Replace(color, replacedColor);
-        }
-        return text;
-    }
-    
-    private string ColoredSpan(string color)
-    {
-        return $"<span class=\"w-3 mx-0.5 rounded-sm\" style=\"background-color:{color};\" title=\"{color}\"></span>";
-    }
 }
